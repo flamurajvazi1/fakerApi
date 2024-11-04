@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
 
 public class PutTests {
 
-    File putActivity = new File(ConfigurationReader.getProperty("putActivityFile")); // Ensure this file only contains necessary fields
+    File putActivity = new File(ConfigurationReader.getProperty("putActivityFile"));
 
     @DisplayName("PUT activities - Success Test")
     @Test
