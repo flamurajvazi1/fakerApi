@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
 
 public class PutAuthorsTest {
 
-    File putAuthors = new File(ConfigurationReader.getProperty("putAuthorsFile")); // Ensure this file only contains necessary fields
+    File putAuthors = new File(ConfigurationReader.getProperty("putAuthorsFile"));
 
     @DisplayName("PUT authors - Success Test")
     @Test
