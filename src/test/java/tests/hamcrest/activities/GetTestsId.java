@@ -43,7 +43,7 @@ public class GetTestsId {
         given().accept(ContentType.JSON)
                 .when().get("/v1/Activities/shd")
                 .then()
-                .log().body(true) // Pretty print the response body
+                .log().body(true)
                 .assertThat().statusCode(400);
 
     }
