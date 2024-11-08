@@ -1,4 +1,4 @@
-package tests.hamcrest.activities;
+package tests.hamcrest.Authors;
 
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
@@ -12,44 +12,44 @@ import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-public class PutTests {
+public class PutAuthorsTest {
 
-    File putActivity = new File(ConfigurationReader.getProperty("putActivityFile"));
+    File putAuthors = new File(ConfigurationReader.getProperty("putAuthorsFile"));
 
-    @DisplayName("PUT activities - Success Test")
+    @DisplayName("PUT authors - Success Test")
     @Test
-    public void putActivitiesSuccessTest() {
+    public void putAuthorsSuccessTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .body(putActivity)
+                .body(putAuthors)
                 .log().all()
                 .when()
-                .put("/v1/Activities/0")
+                .put("/v1/Authors/0")
                 .then()
                 .log().all()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .and()
                 .body("id", is(0))
-                .body("title", is("Flamur"));
+                .body("firstName", is("flamur"));
 
     }
 
-    @DisplayName("PUT activities - Negative Test with Invalid ID")
+    @DisplayName("PUT authors - Negative Test with Invalid ID")
     @Test
-    public void putActivitiesNegativeTest() {
+    public void putAuthorsNegativeTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .body(putActivity)
+                .body(putAuthors)
                 .log().all()
                 .when()
-                .put("/v1/Activities/999sdjfdsfb999")
+                .put("/v1/Authors/jggjng9")
                 .then()
                 .log().all()
                 .assertThat()

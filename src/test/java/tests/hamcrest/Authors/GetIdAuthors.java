@@ -1,4 +1,4 @@
-package tests.hamcrest.authors;
+package tests.hamcrest.Authors;
 
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
@@ -6,50 +6,37 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utilities.ConfigurationReader;
 
-import java.io.File;
-
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
 
-public class PutAuthorsTest {
+public class GetIdAuthors {
 
-    File putAuthors = new File(ConfigurationReader.getProperty("putAuthorsFile"));
-
-    @DisplayName("PUT authors - Success Test")
+    @DisplayName("GET Id authors  - Success Test")
     @Test
-    public void putAuthorsSuccessTest() {
+    public void getAuthorsIdSuccessTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given()
                 .accept(ContentType.JSON)
-                .contentType(ContentType.JSON)
-                .body(putAuthors)
                 .log().all()
                 .when()
-                .put("/v1/Authors/0")
+                .get("/v1/Authors/7")
                 .then()
                 .log().all()
                 .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .and()
-                .body("id", is(0))
-                .body("firstName", is("flamur"));
-
+                .statusCode(HttpStatus.SC_OK);
     }
 
-    @DisplayName("PUT authors - Negative Test with Invalid ID")
+    @DisplayName("GET authors - Negative Test with Invalid ID")
     @Test
-    public void putAuthorsNegativeTest() {
+    public void getAuthorsIdNegativeTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given()
                 .accept(ContentType.JSON)
-                .contentType(ContentType.JSON)
-                .body(putAuthors)
                 .log().all()
                 .when()
-                .put("/v1/Authors/jggjng9")
+                .get("/v1/Authors/a0tt0999")
                 .then()
                 .log().all()
                 .assertThat()

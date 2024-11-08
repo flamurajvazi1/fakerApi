@@ -1,4 +1,4 @@
-package tests.hamcrest.activities;
+package tests.hamcrest.Authors;
 
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
@@ -9,34 +9,34 @@ import utilities.ConfigurationReader;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
-public class DeleteAuthors {
+public class GetTestIdBook {
 
-    @DisplayName("DELETE authors - Success Test")
+    @DisplayName("GET authors Books Id - Success Test")
     @Test
-    public void deleteActivitiesSuccessTest() {
+    public void getAuthorsIdSuccessTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given()
                 .accept(ContentType.JSON)
                 .log().all()
                 .when()
-                .delete("/v1/Authors/7")
+                .get("/v1/Authors/authors/books/7")
                 .then()
                 .log().all()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK);
     }
 
-    @DisplayName("DELETE authors - Negative Test with Invalid ID")
+    @DisplayName("GET authors - Negative Test with Invalid ID")
     @Test
-    public void deleteActivitiesNegativeTest() {
+    public void getAuthorsIdNegativeTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given()
                 .accept(ContentType.JSON)
                 .log().all()
                 .when()
-                .delete("/v1/Authors/7ktt")
+                .get("/v1/Authors/authors/books/70tt0999")
                 .then()
                 .log().all()
                 .assertThat()

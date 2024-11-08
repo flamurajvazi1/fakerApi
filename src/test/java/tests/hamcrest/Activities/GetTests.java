@@ -1,4 +1,4 @@
-package tests.hamcrest.activities;
+package tests.hamcrest.Activities;
 
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;

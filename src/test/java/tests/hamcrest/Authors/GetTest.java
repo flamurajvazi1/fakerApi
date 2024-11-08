@@ -1,4 +1,4 @@
-package tests.hamcrest.authors;
+package tests.hamcrest.Authors;
 
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
@@ -6,40 +6,44 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utilities.ConfigurationReader;
 
+
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
-public class GetTestIdBook {
+public class GetTest {
 
-    @DisplayName("GET authors Books Id - Success Test")
+    @DisplayName("GET authors - Success Test")
     @Test
-    public void getAuthorsIdSuccessTest() {
+    public void getAuthorsSuccessTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
-
         given()
                 .accept(ContentType.JSON)
                 .log().all()
                 .when()
-                .get("/v1/Authors/authors/books/7")
+                .get("/v1/Authors/")
                 .then()
                 .log().all()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK);
+
+
+
     }
+
 
     @DisplayName("GET authors - Negative Test with Invalid ID")
     @Test
-    public void getAuthorsIdNegativeTest() {
+    public void getAuthorsNegativeTest() {
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given()
                 .accept(ContentType.JSON)
                 .log().all()
                 .when()
-                .get("/v1/Authors/authors/books/70tt0999")
+                .get("/v1/Authors/999999")
                 .then()
                 .log().all()
                 .assertThat()
-                .statusCode(HttpStatus.SC_BAD_REQUEST);
+                .statusCode(HttpStatus.SC_NOT_FOUND);
     }
 }

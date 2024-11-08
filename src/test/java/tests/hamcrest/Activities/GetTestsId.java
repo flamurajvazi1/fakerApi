@@ -1,7 +1,6 @@
-package tests.hamcrest.activities;
+package tests.hamcrest.Activities;
 
 import io.restassured.http.ContentType;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Activity;

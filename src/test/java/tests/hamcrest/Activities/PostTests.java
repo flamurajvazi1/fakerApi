@@ -1,4 +1,4 @@
-package tests.hamcrest.authors;
+package tests.hamcrest.Activities;
 
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
@@ -11,39 +11,37 @@ import java.io.File;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
-public class PostTest {
+public class PostTests {
 
+    File addActivity = new File(ConfigurationReader.getProperty("addActivityFile"));
 
-    File postAuthors = new File(ConfigurationReader.getProperty("postAuthorsFile"));
-
-    @DisplayName("POST authors - Hamcrest")
+    @DisplayName("POST activities - Hamcrest")
     @Test
-    public void postAuthorsSuccessTest() {
+    public void postActivitiesSuccessTest() {
 
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
-
         given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().body(postAuthors).log().all()
-                .when().post("/v1/Authors")
+                .and().body(addActivity).log().all()
+                .when().post("/v1/Activities")
                 .then()
                 .log().all()
                 .assertThat().statusCode(HttpStatus.SC_OK);
     }
 
-    @DisplayName("POST authors - Negative Test with Invalid Data")
+    @DisplayName("POST activities - Negative Test with Empty Body")
     @Test
-    public void postAuthorsNegativeTest() {
+    public void postActivitiesNegativeTest() {
+
         baseURI = ConfigurationReader.getProperty("fakerApiUrl");
 
         given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
                 .and().body("").log().all()
-                .when().post("/v1/Authors")
+                .when().post("/v1/Activities")
                 .then()
                 .log().all()
                 .assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
     }
-
 }
